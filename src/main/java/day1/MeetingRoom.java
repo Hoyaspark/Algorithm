@@ -20,13 +20,8 @@ public class MeetingRoom {
             int endTime = scanner.nextInt();
             items.add(new Item(startTime, endTime));
         }
-
-        items.sort((a, b) -> {
-            if (a.getEndTime() == b.getEndTime()) {
-                return a.getStartTime() - b.getStartTime();
-            }
-            return a.getEndTime() - b.getEndTime();
-        });
+        items.sort(Comparator.comparing((Item a) -> a.getEndTime())
+                .thenComparing(Item::getStartTime));
 
         for (int i = 0; i < count; i++) {
             if (i == 0) {
