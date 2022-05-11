@@ -19,20 +19,36 @@ public class boj_1874 {
 
         Stack<Integer> stack = new Stack<>();
 
-        int num = 0;
+        ArrayList<String> result = new ArrayList<>();
 
-        for (int i = 1,j=0; i <= n; i++) {
-            if (i <= list.get(j)) {
-                stack.push(i);
-                System.out.println("+");
+        int i = 1, j = 0;
+
+
+        // 1 2 5 3 4
+        while (j < n) {
+
+            if (!stack.isEmpty() && stack.peek() > list.get(j)) {
+                System.out.println("NO");
+                return;
             }
 
-            while (list.get(j) <= i) {
-                Integer pop = stack.pop();
-                System.out.println("-");
+            if (!stack.isEmpty() && stack.peek().equals(list.get(j))) {
+                stack.pop();
+                result.add("-");
                 j++;
+                continue;
             }
+
+            stack.push(i);
+            result.add("+");
+            i++;
+
         }
+
+        for (int k = 0; k < result.size(); k++) {
+            System.out.println(result.get(k));
+        }
+
     }
 
 }
