@@ -37,11 +37,6 @@ public class boj_2156 {
         }
 
         System.out.println(dp[n - 1]);
-        // oox
-
-        // oxo
-
-        // xoo
     }
 
 }
