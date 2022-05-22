@@ -27,8 +27,6 @@ public class boj_14500 {
                 dfs(i, j, arr[i][j], arr, visited, 1);
                 visited[i][j] = false;
                 // i,j 일때 ㅜ 모양 검사
-                int sum = checkShape(arr, i, j);
-                result = Math.max(result, sum);
             }
         }
 
@@ -36,26 +34,6 @@ public class boj_14500 {
 
     }
 
-    private static int checkShape(int[][] arr, int i, int j) {
-        int sum = 0;
-        if (i < n -1 && i + 1 < n - 1 && i + 2 < n - 1 && j < m - 1 && j + 1 < m - 1){
-            sum = Math.max(sum, arr[i][j] + arr[i + 1][j] + arr[i + 2][j] + arr[i + 1][j + 1]);
-        }
-
-        if (i < n -1 && i + 1< n- 1 && j < m-1 && j + 1< m-1 && j +2 < m-1){
-            sum = Math.max(sum, arr[i][j] + arr[i][j + 1] + arr[i][j + 2] + arr[i + 1][j + 1]);
-
-        }
-
-        if (i < n - 1 && i + 1 < n - 1 && i + 2 < n - 1 && j < m - 1 && j + 1 < m - 1) {
-            sum = Math.max(sum, arr[i + 1][j] + arr[i][j + 1] + arr[i + 1][j + 1] + arr[i + 2][j + 1]);
-        }
-
-        if (i < n - 1 && i + 1 < n - 1 && j < m - 1 && j + 1 < m - 1 && j + 2 < m - 1) {
-            sum = Math.max(sum, arr[i][j + 1] + arr[i + 1][j] + arr[i + 1][j + 1] + arr[i + 1][j + 2]);
-        }
-        return sum;
-    }
 
     static void dfs(int i, int j, int sum, int[][] arr, boolean[][] visited, int depth) {
 
@@ -73,6 +51,11 @@ public class boj_14500 {
             }
 
             if (!visited[xx][yy]) {
+                if (depth == 2) {
+                    visited[xx][yy] = true;
+                    dfs(i, j, sum + arr[xx][yy], arr, visited, depth + 1);
+                    visited[xx][yy] = false;
+                }
                 visited[xx][yy] = true;
                 dfs(xx, yy, sum + arr[xx][yy], arr, visited, depth + 1);
                 visited[xx][yy] = false;
