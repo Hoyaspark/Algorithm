@@ -1,29 +1,31 @@
 package boj510;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
-public class boj_15652 {
+public class boj_15656 {
     static StringBuilder str = new StringBuilder();
-
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         int n = scanner.nextInt();
         int r = scanner.nextInt();
 
-        int[] arr = new int[n];
+        ArrayList<Integer> list = new ArrayList<>();
+
         int[] output = new int[n];
-        for (int i = 1; i <= n; i++) {
-            arr[i - 1] = i;
+        for (int i = 0; i < n; i++) {
+            list.add(scanner.nextInt());
         }
 
-        dfs(arr, output, 0,0, n, r);
+        list.sort((a, b) -> a - b);
+
+        dfs(list, output, 0, n, r);
 
         System.out.println(str);
     }
 
-    private static void dfs(int[] arr, int[] output, int start, int depth, int n, int r) {
-
+    private static void dfs(ArrayList<Integer> list, int[] output,int depth, int n, int r) {
         if (r == 0) {
             for (int i = 0; i < depth; i++) {
                 str.append(output[i] + " ");
@@ -32,9 +34,9 @@ public class boj_15652 {
             return;
         }
 
-        for (int i = start; i < n; i++) {
-            output[depth] = arr[i];
-            dfs(arr, output, i, depth + 1, n, r-1);
+        for (int i = 0; i < n; i++) {
+            output[depth] = list.get(i);
+            dfs(list, output, depth + 1, n, r-1);
         }
     }
 }
